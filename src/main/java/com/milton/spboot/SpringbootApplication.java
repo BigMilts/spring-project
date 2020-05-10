@@ -9,12 +9,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.milton.spboot.Repositories.CategoriaRepository;
 import com.milton.spboot.Repositories.CidadeRepositroy;
+import com.milton.spboot.Repositories.ClienteRepository;
+import com.milton.spboot.Repositories.EnderecoRepository;
 import com.milton.spboot.Repositories.EstadoRepository;
 import com.milton.spboot.Repositories.ProdutoRepository;
 import com.milton.spboot.domain.Categoria;
 import com.milton.spboot.domain.Cidade;
+import com.milton.spboot.domain.Cliente;
+import com.milton.spboot.domain.Endereco;
 import com.milton.spboot.domain.Estado;
 import com.milton.spboot.domain.Produto;
+import com.milton.spboot.domain.enums.TipoCliente;
 
 @SpringBootApplication
 public class SpringbootApplication implements CommandLineRunner {
@@ -27,6 +32,10 @@ public class SpringbootApplication implements CommandLineRunner {
 	private EstadoRepository estadoRep;
 	@Autowired
 	private CidadeRepositroy cidadeRep;
+	@Autowired
+	private ClienteRepository clienteRep;
+	@Autowired
+	private EnderecoRepository enderecoRep;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootApplication.class, args);
@@ -64,6 +73,18 @@ public class SpringbootApplication implements CommandLineRunner {
 		
 		estadoRep.saveAll(Arrays.asList(est1,est2));
 		cidadeRep.saveAll(Arrays.asList(c1,c2,c3));
+		
+		Cliente cli1 = new Cliente(null,"Maria Silva","maria@gmail.com","3637383377",TipoCliente.PESSOAFISICA);
+		
+		cli1.getTelefones().addAll(Arrays.asList("2766323","93838393"));
+		
+		Endereco e1 = new Endereco(null,"Rua flores","300", "Apto 203", "Jardim","3822643",cli1, c1);
+		Endereco e2 = new Endereco(null, "Avaenida Mato", "105", "sala 800", "Centro", "38777012", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRep.save(cli1);
+		enderecoRep.saveAll(Arrays.asList(e1,e2));
 
 	}
 

@@ -16,9 +16,9 @@ import com.milton.spboot.domain.Produto;
 public class SpringbootApplication implements CommandLineRunner {
 	
 	@Autowired
-	private CategoriaRepository categoriarep;
+	private CategoriaRepository categoriaRep;
 	@Autowired
-	private ProdutoRepository produtorep;
+	private ProdutoRepository produtoRep;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootApplication.class, args);
@@ -41,8 +41,8 @@ public class SpringbootApplication implements CommandLineRunner {
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().add(cat1);
 		
-		categoriarep.saveAll(Arrays.asList(cat1, cat2));
-		produtorep.saveAll(Arrays.asList(p1,p2,p3));
+		categoriaRep.saveAll(Arrays.asList(cat1, cat2));
+		produtoRep.saveAll(Arrays.asList(p1,p2,p3));
 	}
 
 }

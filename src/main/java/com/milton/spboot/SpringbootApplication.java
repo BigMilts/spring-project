@@ -13,6 +13,7 @@ import com.milton.spboot.domain.Cidade;
 import com.milton.spboot.domain.Cliente;
 import com.milton.spboot.domain.Endereco;
 import com.milton.spboot.domain.Estado;
+import com.milton.spboot.domain.ItemPedido;
 import com.milton.spboot.domain.Pagamento;
 import com.milton.spboot.domain.PagamentoComBoleto;
 import com.milton.spboot.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.milton.spboot.repositories.CidadeRepositroy;
 import com.milton.spboot.repositories.ClienteRepository;
 import com.milton.spboot.repositories.EnderecoRepository;
 import com.milton.spboot.repositories.EstadoRepository;
+import com.milton.spboot.repositories.ItemPedidoRepository;
 import com.milton.spboot.repositories.PagamentoRepository;
 import com.milton.spboot.repositories.PedidoRepository;
 import com.milton.spboot.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ public class SpringbootApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRep;
 	@Autowired
 	private PagamentoRepository pagamentoRep;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRep;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootApplication.class, args);
@@ -115,6 +119,19 @@ public class SpringbootApplication implements CommandLineRunner {
 		
 		pedidoRep.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRep.saveAll(Arrays.asList(pagto1, pagto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1,p1,0.00, 1,2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1,p3, 0.00,2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().add(ip3);
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRep.saveAll(Arrays.asList(ip1, ip2, ip3));
 		
 	}
 }

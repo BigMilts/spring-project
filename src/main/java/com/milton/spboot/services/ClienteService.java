@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.milton.spboot.Repositories.ClienteRepository;
 import com.milton.spboot.domain.Cliente;
+import com.milton.spboot.repositories.ClienteRepository;
 import com.milton.spboot.services.exception.ObjectNotFoundException;
 
 @Service

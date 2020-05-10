@@ -8,8 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.milton.spboot.Repositories.CategoriaRepository;
+import com.milton.spboot.Repositories.CidadeRepositroy;
+import com.milton.spboot.Repositories.EstadoRepository;
 import com.milton.spboot.Repositories.ProdutoRepository;
 import com.milton.spboot.domain.Categoria;
+import com.milton.spboot.domain.Cidade;
+import com.milton.spboot.domain.Estado;
 import com.milton.spboot.domain.Produto;
 
 @SpringBootApplication
@@ -19,6 +23,10 @@ public class SpringbootApplication implements CommandLineRunner {
 	private CategoriaRepository categoriaRep;
 	@Autowired
 	private ProdutoRepository produtoRep;
+	@Autowired
+	private EstadoRepository estadoRep;
+	@Autowired
+	private CidadeRepositroy cidadeRep;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootApplication.class, args);
@@ -43,6 +51,20 @@ public class SpringbootApplication implements CommandLineRunner {
 		
 		categoriaRep.saveAll(Arrays.asList(cat1, cat2));
 		produtoRep.saveAll(Arrays.asList(p1,p2,p3));
+		
+		Estado est1 = new Estado(null,"Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
+		
+		Cidade c1 = new Cidade(null, "Uberlândia", est1);
+		Cidade c2 = new Cidade(null,"São Paulo", est2);
+		Cidade c3 = new Cidade(null, "Campinas", est2);
+		
+		est1.getCidades().add(c1);
+		est2.getCidades().addAll(Arrays.asList(c2,c3));
+		
+		estadoRep.saveAll(Arrays.asList(est1,est2));
+		cidadeRep.saveAll(Arrays.asList(c1,c2,c3));
+
 	}
 
 }

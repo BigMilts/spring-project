@@ -3,7 +3,7 @@ package com.milton.spboot.domain.enums;
 public enum TipoCliente {
 	
 	PESSOAFISICA(1, "pessoa Fisica"),
-	PESSOAJURcodICA(2, "pessoa Jurídica");
+	PESSOAJURIDICA(2, "pessoa Jurídica");
 	
 	private Integer cod;
 	private String descricao;
@@ -40,4 +40,5 @@ public enum TipoCliente {
 		}
 		throw new IllegalArgumentException("Id inválido: " + cod);
 	}
+	
 }

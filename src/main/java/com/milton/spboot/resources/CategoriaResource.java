@@ -25,11 +25,11 @@ import com.milton.spboot.dto.CategoriaDTO;
 import com.milton.spboot.services.CategoriaService;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping(value="/categorias")
 public class CategoriaResource {
 	
 	@Autowired
-	public CategoriaService service;
+	private CategoriaService service;
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
@@ -37,36 +37,18 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping
-	public ResponseEntity<List<CategoriaDTO>> findAll() {
-		List<Categoria> list = service.findAll();
-		List <CategoriaDTO> listDTO = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
-	}
-	
-	@GetMapping("/page")
-	public ResponseEntity<Page<CategoriaDTO>> findPage(
-			@RequestParam(value ="page", defaultValue = "0") Integer page, 
-			@RequestParam(value ="linesPerPage", defaultValue = "24")Integer linesPerPage, 
-			@RequestParam(value ="orderBy", defaultValue = "nome") String orderBy, 
-			@RequestParam(value ="direction", defaultValue = "ASC")  String direction) {
-		Page<Categoria> list = service.findPage(page, linesPerPage, orderBy, direction);
-		Page<CategoriaDTO> listDTO = list.map(obj -> new CategoriaDTO(obj));
-		return ResponseEntity.ok().body(listDTO);
-	}
-	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto){
-		Categoria obj = service.fromDTO(objDto);		
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
+		Categoria obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+			.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objdto, @PathVariable Integer id){
-		Categoria obj = service.fromDTO(objdto);
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
+		Categoria obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
@@ -78,4 +60,21 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> findAll() {
+		List<Categoria> list = service.findAll();
+		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());  
+		return ResponseEntity.ok().body(listDto);
+	}
+	
+	@GetMapping("/page")
+	public ResponseEntity<Page<CategoriaDTO>> findPage(
+			@RequestParam(value="page", defaultValue="0") Integer page, 
+			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
+			@RequestParam(value="orderBy", defaultValue="nome") String orderBy, 
+			@RequestParam(value="direction", defaultValue="ASC") String direction) {
+		Page<Categoria> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<CategoriaDTO> listDto = list.map(obj -> new CategoriaDTO(obj));  
+		return ResponseEntity.ok().body(listDto);
+	}
 }

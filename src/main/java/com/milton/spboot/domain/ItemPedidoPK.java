@@ -9,13 +9,13 @@ import javax.persistence.ManyToOne;
 @Embeddable
 public class ItemPedidoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManyToOne
 	@JoinColumn(name="pedido_id")
 	private Pedido pedido;
 	
 	@ManyToOne
-	@JoinColumn(name = "produto_id")
+	@JoinColumn(name="produto_id")
 	private Produto produto;
 	
 	public Pedido getPedido() {
@@ -30,7 +30,6 @@ public class ItemPedidoPK implements Serializable {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,7 +59,7 @@ public class ItemPedidoPK implements Serializable {
 			return false;
 		return true;
 	}
-
+	
 	
 	
 }

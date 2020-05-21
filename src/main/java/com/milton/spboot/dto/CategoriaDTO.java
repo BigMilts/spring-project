@@ -11,27 +11,26 @@ import com.milton.spboot.domain.Categoria;
 public class CategoriaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id;
 	
-	private Integer Id;
-	
-	@NotEmpty(message ="Preenchimento obrigatório")
-	@Length(min=5, max=80, message ="O Tamanho deve ser entre 5 e 80 caracteres")
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
 	private String nome;
-	
+
 	public CategoriaDTO() {
 	}
 	
 	public CategoriaDTO(Categoria obj) {
-		this.Id = obj.getId();
-		this.nome = obj.getNome();
+		id = obj.getId();
+		nome = obj.getNome();
 	}
 
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getNome() {

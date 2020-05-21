@@ -1,5 +1,7 @@
 package com.milton.spboot.domain;
 
+
+
 import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
@@ -30,10 +32,9 @@ public class ItemPedido implements Serializable {
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
-	
-	
+
 	public double getSubTotal() {
-		return (this.preco - this.desconto) * this.quantidade; 
+		return (preco - desconto) * quantidade;
 	}
 	
 	@JsonIgnore
@@ -41,11 +42,18 @@ public class ItemPedido implements Serializable {
 		return id.getPedido();
 	}
 	
+	public void setPedido(Pedido pedido) {
+		id.setPedido(pedido);
+	}
 	
 	public Produto getProduto() {
 		return id.getProduto();
 	}
-
+	
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
+	}
+	
 	public ItemPedidoPK getId() {
 		return id;
 	}
@@ -102,6 +110,5 @@ public class ItemPedido implements Serializable {
 			return false;
 		return true;
 	}
-	
 	
 }

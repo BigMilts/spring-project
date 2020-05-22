@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.services.validation;
+package com.milton.spboot.services.validation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,12 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.nelioalves.cursomc.domain.Cliente;
-import com.nelioalves.cursomc.domain.enums.TipoCliente;
-import com.nelioalves.cursomc.dto.ClienteNewDTO;
-import com.nelioalves.cursomc.repositories.ClienteRepository;
-import com.nelioalves.cursomc.resources.exception.FieldMessage;
-import com.nelioalves.cursomc.services.validation.utils.BR;
+import com.milton.spboot.domain.Cliente;
+import com.milton.spboot.domain.enums.TipoCliente;
+import com.milton.spboot.dto.ClienteNewDTO;
+import com.milton.spboot.repositories.ClienteRepository;
+import com.milton.spboot.resources.exception.FieldMessage;
+import com.milton.spboot.services.validations.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 

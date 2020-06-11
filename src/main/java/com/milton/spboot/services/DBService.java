@@ -20,6 +20,7 @@ import com.milton.spboot.domain.PagamentoComCartao;
 import com.milton.spboot.domain.Pedido;
 import com.milton.spboot.domain.Produto;
 import com.milton.spboot.domain.enums.EstadoPagamento;
+import com.milton.spboot.domain.enums.Perfil;
 import com.milton.spboot.domain.enums.TipoCliente;
 import com.milton.spboot.repositories.CategoriaRepository;
 import com.milton.spboot.repositories.CidadeRepositroy;
@@ -120,17 +121,24 @@ public class DBService {
 		estadoRep.saveAll(Arrays.asList(est1,est2));
 		cidadeRep.saveAll(Arrays.asList(c1,c2,c3));
 		
-		Cliente cli1 = new Cliente(null,"Maria Silva","miltonvieirasoutomaior17@gmail.com","3637383377",TipoCliente.PESSOAFISICA, pe.encode("123"));
-		
+		Cliente cli1 = new Cliente(null, "Maria Silva","miltonvieirasoutomaior17@gmail.com","3637383377",TipoCliente.PESSOAFISICA, pe.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("2766323","93838393"));
 		
+		Cliente cli2 = new Cliente(null, "Ana Costa","miltonvieirasoutomaior15@gmail.com", "31352894009", TipoCliente.PESSOAFISICA, pe.encode("123"));
+		cli2.getTelefones().addAll(Arrays.asList("6858323","967638393"));
+		cli2.AddPerfil(Perfil.ADMIN);
+		
 		Endereco e1 = new Endereco(null,"Rua flores","300", "Apto 203", "Jardim","3822643",cli1, c1);
-		Endereco e2 = new Endereco(null, "Avaenida Mato", "105", "sala 800", "Centro", "38777012", cli1, c2);
+		Endereco e2 = new Endereco(null, "Avenida Mato", "105", "sala 800", "Centro", "38777012", cli1, c2);
+		Endereco e3 = new Endereco(null, "Avenida Floriodo", "2106", null, "Centro", "28777012", cli1, c2);
+		
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 		
-		clienteRep.save(cli1);
-		enderecoRep.saveAll(Arrays.asList(e1,e2));
+		
+		clienteRep.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRep.saveAll(Arrays.asList(e1,e2, e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		

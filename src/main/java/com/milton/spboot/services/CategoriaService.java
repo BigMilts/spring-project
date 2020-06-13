@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import com.milton.spboot.domain.Categoria;
 import com.milton.spboot.dto.CategoriaDTO;
 import com.milton.spboot.repositories.CategoriaRepository;
-import com.milton.spboot.services.exception.DataIntegrityException;
-import com.milton.spboot.services.exception.ObjectNotFoundException;
+import com.milton.spboot.services.exceptions.DataIntegrityException;
+import com.milton.spboot.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {

@@ -15,13 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.milton.spboot.domain.Cidade;
 import com.milton.spboot.domain.Cliente;
 import com.milton.spboot.domain.Endereco;
+import com.milton.spboot.domain.enums.Perfil;
 import com.milton.spboot.domain.enums.TipoCliente;
 import com.milton.spboot.dto.ClienteDTO;
 import com.milton.spboot.dto.ClienteNewDTO;
 import com.milton.spboot.repositories.ClienteRepository;
 import com.milton.spboot.repositories.EnderecoRepository;
-import com.milton.spboot.services.exception.DataIntegrityException;
-import com.milton.spboot.services.exception.ObjectNotFoundException;
+import com.milton.spboot.security.UserSS;
+import com.milton.spboot.services.exceptions.AuthorizationException;
+import com.milton.spboot.services.exceptions.DataIntegrityException;
+import com.milton.spboot.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -36,6 +39,12 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
+		
+		UserSS user = UserServices.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

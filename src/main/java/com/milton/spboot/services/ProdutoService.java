@@ -13,7 +13,7 @@ import com.milton.spboot.domain.Categoria;
 import com.milton.spboot.domain.Produto;
 import com.milton.spboot.repositories.CategoriaRepository;
 import com.milton.spboot.repositories.ProdutoRepository;
-import com.milton.spboot.services.exception.ObjectNotFoundException;
+import com.milton.spboot.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProdutoService {

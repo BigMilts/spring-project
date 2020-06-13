@@ -15,7 +15,7 @@ import com.milton.spboot.domain.enums.EstadoPagamento;
 import com.milton.spboot.repositories.ItemPedidoRepository;
 import com.milton.spboot.repositories.PagamentoRepository;
 import com.milton.spboot.repositories.PedidoRepository;
-import com.milton.spboot.services.exception.ObjectNotFoundException;
+import com.milton.spboot.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PedidoService {
